@@ -45,5 +45,17 @@ namespace Chessington.GameEngine.Tests.Pieces
             moves.Should().BeEmpty();
 
         }
+        [Test]
+        public void Rook_Cannnot_Skip_Opponent()
+        {
+            var board = new Board();
+            var rook = new Rook(Player.White);
+            board.AddPiece(Square.At(4, 4), rook);
+            var pieceToTake = new Pawn(Player.Black);
+            board.AddPiece(Square.At(4, 6), pieceToTake);
+
+            var moves = rook.GetAvailableMoves(board);
+            moves.Should().NotContain(Square.At(4, 7));
+        }
     }
 }
