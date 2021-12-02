@@ -25,7 +25,14 @@ namespace Chessington.GameEngine
         {
             board[square.Row, square.Col] = pawn;
         }
-    
+        public bool IsOccupied(Square square)
+        {
+            return (square.Col >= 0 && square.Col <= GameSettings.BoardSize) && (square.Row >= 0 && square.Row <= GameSettings.BoardSize) && (GetPiece(square) != null);
+        }
+        public bool IsSquareAvailable(Square square)
+        {
+            return (square.Col >= 0 && square.Col <= GameSettings.BoardSize) && (square.Row >= 0 && square.Row <= GameSettings.BoardSize) && (GetPiece(square) == null);
+        }
         public Piece GetPiece(Square square)
         {
             return board[square.Row, square.Col];
@@ -60,7 +67,7 @@ namespace Chessington.GameEngine
             //Move the piece and set the 'from' square to be empty.
             board[to.Row, to.Col] = board[from.Row, from.Col];
             board[from.Row, from.Col] = null;
-
+            movingPiece.HasMoved = true;
             CurrentPlayer = movingPiece.Player == Player.White ? Player.Black : Player.White;
             OnCurrentPlayerChanged(CurrentPlayer);
         }

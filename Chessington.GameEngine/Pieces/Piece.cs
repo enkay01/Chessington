@@ -12,6 +12,7 @@ namespace Chessington.GameEngine.Pieces
         }
 
         public Player Player { get; private set; }
+        public bool HasMoved { get; set; }
 
         public abstract IEnumerable<Square> GetAvailableMoves(Board board);
 
