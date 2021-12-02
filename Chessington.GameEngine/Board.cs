@@ -27,11 +27,11 @@ namespace Chessington.GameEngine
         }
         public bool IsOccupied(Square square)
         {
-            return (square.Col >= 0 && square.Col <= GameSettings.BoardSize) && (square.Row >= 0 && square.Row <= GameSettings.BoardSize) && (GetPiece(square) != null);
+            return (square.Col >= 0 && square.Col < GameSettings.BoardSize) && (square.Row >= 0 && square.Row < GameSettings.BoardSize) && (GetPiece(square) != null);
         }
         public bool IsSquareAvailable(Square square)
         {
-            return (square.Col >= 0 && square.Col <= GameSettings.BoardSize) && (square.Row >= 0 && square.Row <= GameSettings.BoardSize) && (GetPiece(square) == null);
+            return (square.Col >= 0 && square.Col < GameSettings.BoardSize) && (square.Row >= 0 && square.Row < GameSettings.BoardSize) && (GetPiece(square) == null);
         }
         public Piece GetPiece(Square square)
         {
