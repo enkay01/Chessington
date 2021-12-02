@@ -26,10 +26,10 @@ namespace Chessington.GameEngine.Pieces
         }
         protected IEnumerable<Square> GetDiagonalMoves(Board board)
         {
-            var squares = GetAvailableMovesInDirection(board, s => Square.At(s.Row + 1, s.Col + 1)).ToList();
-            squares.AddRange(GetAvailableMovesInDirection(board, s => Square.At(s.Row - 1, s.Col + 1)));
-            squares.AddRange(GetAvailableMovesInDirection(board, s => Square.At(s.Row - 1, s.Col - 1)));
-            squares.AddRange(GetAvailableMovesInDirection(board, s => Square.At(s.Row + 1, s.Col - 1)));
+            var squares = GetAvailableMovesInDirection(board, s => Square.At(s.Row + 1, s.Col + 1)).ToList();//upright
+            squares.AddRange(GetAvailableMovesInDirection(board, s => Square.At(s.Row - 1, s.Col + 1)));//downright
+            squares.AddRange(GetAvailableMovesInDirection(board, s => Square.At(s.Row + 1, s.Col - 1)));//upleft
+            squares.AddRange(GetAvailableMovesInDirection(board, s => Square.At(s.Row - 1, s.Col - 1)));//downleft
             return squares;
         }
         private IEnumerable<Square> GetAvailableMovesInDirection(Board board, Func<Square, Square> iterator)
