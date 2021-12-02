@@ -24,6 +24,14 @@ namespace Chessington.GameEngine.Pieces
             return squares;
 
         }
+        protected IEnumerable<Square> GetDiagonalMoves(Board board)
+        {
+            var squares = GetAvailableMovesInDirection(board, s => Square.At(s.Row + 1, s.Col + 1)).ToList();
+            squares.AddRange(GetAvailableMovesInDirection(board, s => Square.At(s.Row - 1, s.Col + 1)));
+            squares.AddRange(GetAvailableMovesInDirection(board, s => Square.At(s.Row - 1, s.Col - 1)));
+            squares.AddRange(GetAvailableMovesInDirection(board, s => Square.At(s.Row + 1, s.Col - 1)));
+            return squares;
+        }
         private IEnumerable<Square> GetAvailableMovesInDirection(Board board, Func<Square, Square> iterator)
         {
             var location = board.FindPiece(this);
