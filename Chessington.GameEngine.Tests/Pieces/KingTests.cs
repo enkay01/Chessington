@@ -31,5 +31,26 @@ namespace Chessington.GameEngine.Tests.Pieces
 
             moves.ShouldAllBeEquivalentTo(expectedMoves);
         }
+        [Test]
+        public void King_Cannot_Move()
+        {
+            var board = new Board(Player.Black);
+            var pawnB = new Pawn(Player.Black);
+            var king = new King(Player.Black);
+            var knight = new Knight(Player.Black);
+
+            board.AddPiece(Square.At(0, 4), king);
+            //in front
+            board.AddPiece(Square.At(1, 3), pawnB);
+            board.AddPiece(Square.At(1, 4), pawnB);
+            board.AddPiece(Square.At(1, 5), pawnB);
+            //left and right
+            board.AddPiece(Square.At(0, 3), pawnB);
+            board.AddPiece(Square.At(0, 5), knight);
+
+            var moves = king.GetAvailableMoves(board);
+            moves.Should().BeEmpty();
+
+        }
     }
 }

@@ -83,5 +83,18 @@ namespace Chessington.GameEngine.Tests.Pieces
             moves.Should().HaveCount(1);
             moves.Should().Contain(square => square.Equals(Square.At(7, 2)));
         }
+        [Test]
+        public void Pawn_Cannot_Move()
+        {
+            var board = new Board(Player.Black);
+            var pawnB = new Pawn(Player.Black);
+            var pawnW = new Pawn(Player.White);
+
+            board.AddPiece(Square.At(4, 2), pawnB);
+            board.AddPiece(Square.At(3, 2), pawnW);
+            var moves = pawnW.GetAvailableMoves(board).ToList();
+            moves.Should().NotContain(square => square.Equals(Square.At(4, 2)));
+
+        }
     }
 }

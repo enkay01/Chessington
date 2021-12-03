@@ -29,5 +29,21 @@ namespace Chessington.GameEngine.Tests.Pieces
 
             moves.Should().Contain(expectedMoves);
         }
+        [Test]
+        public void Rook_Cannot_Move()
+        {
+            var board = new Board(Player.Black);
+            var pawnB = new Pawn(Player.Black);
+            var RookB = new Rook(Player.Black);
+            var knight = new Knight(Player.Black);
+
+            board.AddPiece(Square.At(0, 0), RookB);
+            board.AddPiece(Square.At(1, 0), pawnB);
+            board.AddPiece(Square.At(0, 1), knight);
+
+            var moves = RookB.GetAvailableMoves(board);
+            moves.Should().BeEmpty();
+
+        }
     }
 }
