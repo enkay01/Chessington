@@ -36,7 +36,7 @@ namespace Chessington.GameEngine.Pieces
         {
             var location = board.FindPiece(this);
             var square = iterator(location);
-            while (board.IsSquareAvailable(square))
+            while (board.IsSquareAvailable(square) || (board.IsOccupied(square) && board.GetPiece(square).Player != Player))
             {
                 yield return square;
                 if (board.GetPiece(square) != null) break;
